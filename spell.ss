@@ -15,15 +15,19 @@
 ;; HELPER FUNCTIONS
 
 ;; *** CODE FOR ANY HELPER FUNCTION GOES HERE ***
-(define key2
-	(lambda (w)
-		(cond ((null? w) 5387)
-			(else
-				(+ (ctv(car w)) (* (key2(cdr w)) 31)) 
-			)
-		)
-	)	
-)
+
+(define getKey
+  (lambda (w) 
+    (if (= (length w) 1) (+ (* 31 5387) (ctv(car w))) (+ (* 31 (getKey(cdr w))) (ctv (car w))))
+    )
+  )
+
+(define mapping
+  (lambda (dictonary hMap)
+    (flatten (map (lambda (n) (append (map (lambda (m) (m n)) hMap))) dictonary))
+    )
+  )
+
 
 
 ;; -----------------------------------------------------
@@ -31,9 +35,9 @@
 
 (define key
   (lambda (w)
-     'SOME_CODE_GOES_HERE ;; *** FUNCTION BODY IS MISSING ***
-))
-
+    (getKey (reverse w))
+    )
+  )
 ;; -----------------------------------------------------
 ;; EXAMPLE KEY VALUES
 ;;   (key '(h e l l o))     = 154238504134
@@ -102,9 +106,12 @@
 ;; SPELL CHECKER GENERATOR
 
 (define gen-checker
-  (lambda (hashfunctionlist dict)
-     'SOME_CODE_GOES_HERE ;; *** FUNCTION BODY IS MISSING ***
-))
+  (lambda (hList dict)
+    (let ((b (flattenHash dict hList)))
+      (lambda (w)
+        (let ((w (flattenHash (list w) hList)))
+          (if (andmap (lambda (mapedW) (member mapedW b)) w) #t #f)
+          )))))
 
 
 ;; -----------------------------------------------------
