@@ -108,9 +108,9 @@
 (define gen-checker
   (lambda (hList dict)
     (let ((b (flattenHash dict hList)))
-      (lambda (w)
-        (let ((w (flattenHash (list w) hList)))
-          (if (andmap (lambda (mapedW) (member mapedW b)) w) #t #f)
+      (lambda (k)
+        (let ((k (flattenHash (list k) hList)))
+          (if (andmap (lambda (mapedW) (member mapedW b)) k) #t #f)
           )))))
 
 
