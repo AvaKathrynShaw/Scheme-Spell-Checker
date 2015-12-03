@@ -15,6 +15,15 @@
 ;; HELPER FUNCTIONS
 
 ;; *** CODE FOR ANY HELPER FUNCTION GOES HERE ***
+(define key2
+	(lambda (w)
+		(cond ((null? w) 5387)
+			(else
+				(+ (ctv(car w)) (* (key2(cdr w)) 31)) 
+			)
+		)
+	)	
+)
 
 
 ;; -----------------------------------------------------
